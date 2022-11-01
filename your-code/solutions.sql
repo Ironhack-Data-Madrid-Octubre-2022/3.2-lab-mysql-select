@@ -37,4 +37,11 @@ order by quantity desc limit 3
 
 ---
 
-
+select a.au_id as 'ID', a.au_lname as 'LAST NAME', a.au_fname as 'FIRT NAME', coalesce(sum(s.qty),0) as 'TOTAL'
+from authors as a
+left join titleauthor as ta
+on a.au_id = ta.au_id
+left join sales as s
+on s.title_id = ta.title_id
+group by a.au_id
+order by TOTAL desc
