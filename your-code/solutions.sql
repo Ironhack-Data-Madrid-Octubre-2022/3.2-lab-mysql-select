@@ -15,7 +15,7 @@ where a.au_id is not null;
 Challenge 2 - Who Have Published How Many At Where?
 
 select a.au_id as 'AUTHOR ID', a.au_lname AS 'LAST NAME', a.au_fname AS 'FIRST NAME', 
-		t.title AS 'TITLE', p.pub_name as 'PUBLISHERS', count(*)
+		t.title AS 'TITLE', p.pub_name as 'PUBLISHERS', count(p.pub_id)
 from titles t
 left join titleauthor ta
 on ta.title_id=t.title_id
@@ -24,7 +24,8 @@ on a.au_id=ta.au_id
 left join publishers p
 on p.pub_id=t.pub_id
 where a.au_id is not null
-group by a.au_id;
+group by a.au_id,p.pub_id;
+
 
 
 
@@ -39,7 +40,6 @@ left join authors a
 on a.au_id=ta.au_id
 left join sales s
 on t.title_id=s.title_id
-where a.au_id is not null
 group by a.au_id
 order by total desc
 limit 3;
@@ -56,6 +56,5 @@ left join authors a
 on a.au_id=ta.au_id
 left join sales s
 on t.title_id=s.title_id
-where a.au_id is not null
 group by a.au_id
 order by total desc;
