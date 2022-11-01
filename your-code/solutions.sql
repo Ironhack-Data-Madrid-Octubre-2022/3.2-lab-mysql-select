@@ -23,3 +23,18 @@ group by p.pub_name, a.au_id;
       
 ---
 
+select a.au_id as 'ID', a.au_lname as 'LAST NAME', a.au_fname as 'FIRST NAME', sum(s.qty) as 'QUANTITY'
+
+from authors as a
+left join titleauthor as ta
+on ta.au_id = a.au_id
+left join titles as t
+on ta.title_id = t.title_id
+inner join sales as s
+on ta.title_id = s.title_id
+group by a.au_id
+order by quantity desc limit 3
+
+---
+
+
