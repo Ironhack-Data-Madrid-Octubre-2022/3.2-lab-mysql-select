@@ -24,23 +24,32 @@ order by  count(ta.title_id) desc;
 
 #CHALLENGE 3
 
-select a.au_id,a.au_fname,a.au_lname,count(t.title )
+select a.au_id,a.au_fname,a.au_lname,sum(s.qty )
 from authors as a
 left join titleauthor as ta
 on a.au_id=ta.au_id
 left join titles as t
 on ta.title_id=t.title_id
+left join sales as s
+on t.title_id=s.title_id
 group by a.au_id
-order by count(t.title) desc limit 3;
+order by count(s.qty) desc limit 3;
 
 
 #CHALLENGE 4
 
-select a.au_id,a.au_fname,a.au_lname,count(t.title )
+
+select a.au_id,a.au_fname,a.au_lname,ifnull(sum(s.qty),0) as salesqty
 from authors as a
 left join titleauthor as ta
 on a.au_id=ta.au_id
 left join titles as t
 on ta.title_id=t.title_id
+left join sales as s
+on t.title_id=s.title_id
 group by a.au_id
-order by count(t.title) desc ; 
+order by salesqty desc;
+
+
+
+
