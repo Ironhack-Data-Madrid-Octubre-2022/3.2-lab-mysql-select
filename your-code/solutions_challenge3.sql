@@ -9,6 +9,6 @@ LEFT JOIN (SELECT title_id, SUM(qty) as N_ventas
 FROM SALES
 GROUP BY title_id) as s ON ta.title_id = s.title_id
 ) as z
-GROUP BY z.au_id, z.au_lname, z.au_fname
+GROUP BY AUTHOR_ID, LAST_NAME, FIRST_NAME
 ORDER BY TOTAL DESC
 LIMIT 3;
